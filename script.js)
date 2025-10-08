@@ -1,0 +1,87 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. Lógica do Carrossel de Fotos (Slider) ---
+    
+    const images = document.querySelectorAll('.slide-image');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentIndex = 0;
+
+    function updateSlider() {
+        // Esconde todas as imagens
+        images.forEach(img => img.classList.remove('active'));
+        // Mostra a imagem atual
+        images[currentIndex].classList.add('active');
+    }
+
+    prevBtn.addEventListener('click', () => {
+        // Volta para a imagem anterior. Se estiver na primeira, volta para a última (loop).
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        updateSlider();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        // Vai para a próxima imagem. Se estiver na última, volta para a primeira (loop).
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateSlider();
+    });
+
+    // Inicializa o slider (mostra a primeira imagem ao carregar)
+    updateSlider();
+
+    // --- 2. Lógica das Avaliações (Reviews) ---
+    
+    const reviewsList = document.getElementById('reviews-list');
+    const reviewForm = document.getElementById('review-form');
+
+    // Dados iniciais (Simulação de dados de avaliações)
+    let reviews = [
+        { name: "Ana M.", rating: 5, text: "O vestido é lindo e o tecido é super macio! Minha filha amou. Recomendo!" },
+        { name: "João P.", rating: 4, text: "Entrega rápida. A qualidade é boa, mas achei a cor um pouco diferente da foto." },
+        { name: "Carla S.", rating: 5, text: "Perfeito! O tamanho veio correto e o acabamento é excelente." }
+    ];
+
+    // Função para exibir as avaliações no HTML
+    function renderReviews() {
+        reviewsList.innerHTML = ''; // Limpa a lista antes de recarregar
+        reviews.forEach(review => {
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review-item');
+            
+            // Cria a representação das estrelas (ex: ★★★★★)
+            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+
+            reviewElement.innerHTML = `
+                <div class="review-header">
+                    <span>${review.name}</span>
+                    <span class="rating">${stars}</span>
+                </div>
+                <p>${review.text}</p>
+            `;
+            reviewsList.appendChild(reviewElement);
+        });
+    }
+
+    // Lida com o envio do formulário de avaliação
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o recarregamento padrão da página
+
+        const name = document.getElementById('reviewer-name').value;
+        const rating = parseInt(document.getElementById('review-rating').value);
+        const text = document.getElementById('review-text').value;
+
+        // Validação simples
+        if (name && rating >= 1 && rating <= 5 && text) {
+            const newReview = { name, rating, text };
+            reviews.unshift(newReview); // Adiciona a nova avaliação no topo da lista
+            renderReviews(); // Atualiza a visualização
+            reviewForm.reset(); // Limpa o formulário
+
+            alert('Avaliação enviada com sucesso! (Em um sistema real, isso seria salvo em um banco de dados.)');
+        } else {
+            alert('Por favor, preencha todos os campos corretamente.');
+        }
+    });
+
+    // Inicializa a lista de avaliações
+    renderReviews();
+});

@@ -1,1152 +1,342 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart - Loja de Celulares</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Produto - Vestido Infantil Alegria</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <h1>Smart - Loja de Celulares</h1>
-            <nav>
-                <a href="#produtos">Modelos</a>
-                <a href="#carrinho">Carrinho (<span id="item-count">0</span> Itens)</a>
-            </nav>
-        </div>
+        <h1>Loja Kids Alegres</h1>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Roupas</a>
+            <a href="#">Contato</a>
+        </nav>
     </header>
 
-    <main>
-        <section id="produtos" class="container">
-            <h2>Modelos de Celulares</h2>
-            <div class="produtos-container">
-                <!-- Produtos serão inseridos aqui via JavaScript -->
+    <main class="product-container">
+        <section class="product-details">
+            
+            <div class="image-slider">
+                <div class="slider-wrapper">
+                    <img src="img/vestido_frente.jpg" alt="Vestido Infantil - Vista Frontal" class="slide-image active">
+                    <img src="img/vestido_costas.jpg" alt="Vestido Infantil - Detalhe Costas" class="slide-image">
+                    <img src="img/vestido_detalhe.jpg" alt="Vestido Infantil - Detalhe Estampa" class="slide-image">
+                </div>
+                <button class="prev-btn">❮</button>
+                <button class="next-btn">❯</button>
+            </div>
+            
+            <div class="product-info">
+                <h2>Vestido Infantil Florido Alegria</h2>
+                <p class="price">R$ 79,90</p>
+                
+                <h3>Descrição:</h3>
+                <p>Vestido alegre e confortável para meninas, ideal para passeios e festas. Feito em algodão macio e estampa exclusiva de flores.</p>
+                
+                <h3>Recomendações:</h3>
+                <ul>
+                    <li>Lavar à máquina em ciclo suave.</li>
+                    <li>Não usar alvejante.</li>
+                    <li>Passar a ferro em temperatura baixa.</li>
+                    <li>Tamanhos disponíveis: 2, 4, 6, 8 anos.</li>
+                </ul>
+                
+                <button class="add-to-cart">Adicionar ao Carrinho</button>
             </div>
         </section>
 
-        <section id="carrinho" class="container">
-            <h2>Carrinho de Compras</h2>
-            <ul id="carrinho-list">
-                <li>Seu carrinho está vazio.</li>
-            </ul>
-            <button id="finalizar-compra" class="button">Finalizar Compra</button>
+        <section class="reviews-section">
+            <h2>Avaliações dos Clientes</h2>
+            <div id="reviews-list">
+                </div>
+
+            <h3>Deixe sua Avaliação</h3>
+            <form id="review-form">
+                <input type="text" id="reviewer-name" placeholder="Seu Nome" required>
+                <select id="review-rating" required>
+                    <option value="">Nota (estrelas)</option>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+                <textarea id="review-text" placeholder="Sua opinião sobre o produto..." required></textarea>
+                <button type="submit">Enviar Avaliação</button>
+            </form>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2025 Smart - Todos os direitos reservados</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-2. CSS - styles.css
-css
-Copiar código
-/* Reset básico de estilo */
+/* Reset básico para melhor consistência */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f4f4f9;
     color: #333;
 }
 
+/* --- Cabeçalho (Header) --- */
 header {
-    background-color: #1a1a1a;
+    background-color: #ffb6c1; /* Rosa claro, tema infantil */
     color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-header .container {
-    width: 80%;
-    margin: 0 auto;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+header h1 {
+    font-size: 1.8em;
+}
+
 header nav a {
     color: white;
-    margin-left: 20px;
     text-decoration: none;
-    font-size: 1.2em;
+    margin-left: 15px;
+    font-weight: bold;
 }
 
-main {
-    padding: 40px 0;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.produtos-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.produto {
+/* --- Layout da Página de Produto --- */
+.product-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
     background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-details {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* --- Carrossel de Fotos (Image Slider) --- */
+.image-slider {
+    position: relative;
+    width: 50%; /* Ocupa metade da largura na área de detalhes */
+    overflow: hidden;
     border: 1px solid #ddd;
     border-radius: 8px;
-    width: 220px;
-    margin: 20px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.produto img {
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.slide-image {
     width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    display: none; /* Esconde todas as imagens por padrão */
 }
 
-.produto h3 {
-    font-size: 1.3em;
+.slide-image.active {
+    display: block; /* Mostra apenas a imagem ativa */
+}
+
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    z-index: 10;
+    border-radius: 50%;
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* --- Informações do Produto --- */
+.product-info {
+    width: 50%;
+}
+
+.product-info h2 {
+    color: #ff69b4; /* Pink */
     margin-bottom: 10px;
 }
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart - Loja de Celulares</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Smart - Loja de Celulares</h1>
-            <nav>
-                <a href="#produtos">Modelos</a>
-                <a href="#carrinho">Carrinho (<span id="item-count">0</span> Itens)</a>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <section id="produtos" class="container">
-            <h2>Modelos de Celulares</h2>
-            <div class="produtos-container">
-                <!-- Produtos serão inseridos aqui via JavaScript -->
-            </div>
-        </section>
-
-        <section id="carrinho" class="container">
-            <h2>Carrinho de Compras</h2>
-            <ul id="carrinho-list">
-                <li>Seu carrinho está vazio.</li>
-            </ul>
-            <button id="finalizar-compra" class="button">Finalizar Compra</button>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Smart - Todos os direitos reservados</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-2. CSS - styles.css
-css
-Copiar código
-/* Reset básico de estilo */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.price {
+    font-size: 2em;
+    font-weight: bold;
+    color: #4CAF50; /* Verde para destaque de preço */
+    margin-bottom: 20px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+.product-info h3 {
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
-header {
-    background-color: #1a1a1a;
+.add-to-cart {
+    background-color: #ff69b4;
     color: white;
-    padding: 20px 0;
-    text-align: center;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
 }
 
-header .container {
-    width: 80%;
-    margin: 0 auto;
+.add-to-cart:hover {
+    background-color: #ff1493; /* Deep Pink */
+}
+
+/* --- Seção de Avaliações --- */
+.reviews-section {
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+#reviews-list {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.review-item {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.review-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-header nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 1.2em;
+.review-header .rating {
+    color: gold; /* Destaque para as estrelas */
 }
 
-main {
-    padding: 40px 0;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.produtos-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.produto {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 220px;
-    margin: 20px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.produto img {
+/* --- Formulário de Avaliação --- */
+#review-form input, 
+#review-form select, 
+#review-form textarea {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.produto h3 {
-    font-size: 1.3em;
+    padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.produto p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
+#review-form textarea {
+    resize: vertical;
 }
 
-button {
-    background-color: #28a745;
+#review-form button {
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-button:hover {
-    background-color: #218838;
+#review-form button:hover {
+    background-color: #45a049;
 }
+// --- Lógica do Carrossel de Fotos (Slider) ---
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.slide-image');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentIndex = 0;
 
-#carrinho-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-#carrinho-list li {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-#finalizar-compra {
-    background-color: #007bff;
-}
-
-#finalizar-compra:hover {
-    background-color: #0056b3;
-}
-
-footer {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-3. JavaScript - script.js
-javascript
-Copiar código
-// Definir os dados dos celulares
-const produtos = [
-    {
-        id: 1,
-        nome: "Samsung Galaxy S21",
-        imagem: "https://example.com/s21.jpg",
-        preco: 4500,
-        descricao: "Samsung Galaxy S21 com tela de 6.2”, câmera de 64 MP e bateria de 4000 mAh."
-    },
-    {
-        id: 2,
-        nome: "iPhone 13",
-        imagem: "https://example.com/iphone13.jpg",
-        preco: 6800,
-        descricao: "iPhone 13 com chip A15, câmera de 12 MP e tela Super Retina XDR."
-    },
-    {
-        id: 3,
-        nome: "Xiaomi Mi 11",
-        imagem: "https://example.com/mi11.jpg",
-        preco: 3500,
-        descricao: "Xiaomi Mi 11 com tela AMOLED de 6.81” e câmera de 108 MP."
-    },
-    {
-        id: 4,
-        nome: "Motorola Edge 20",
-        imagem: "https://example.com/edge20.jpg",
-        preco: 3200,
-        descricao: "Motorola Edge 20 com tela OLED de 6.7” e câmera de 108 MP."
+    function updateSlider() {
+        // Esconde todas as imagens
+        images.forEach(img => img.classList.remove('active'));
+        // Mostra a imagem atual
+        images[currentIndex].classList.add('active');
     }
-];
 
-// Função para exibir os produtos
-function exibirProdutos() {
-    const container = document.querySelector('.produtos-container');
-    container.innerHTML = ''; // Limpar produtos existentes
-
-    produtos.forEach(produto => {
-        const divProduto = document.createElement('div');
-        divProduto.classList.add('produto');
-
-        divProduto.innerHTML = `
-            <img src="${produto.imagem}" alt="${produto.nome}">
-            <h3>${produto.nome}</h3>
-            <p>R$ ${produto.preco.toFixed(2)}</p>
-            <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
-        `;
-
-        container.appendChild(divProduto);
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        updateSlider();
     });
-}
 
-// Função para adicionar produto ao carrinho
-let carrinho = [];
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateSlider();
+    });
 
-function adicionarAoCarrinho(produtoId) {
-    const produto = produtos.find(p => p.id === produtoId);
-    carrinho.push(produto);
-    atualizarCarrinho();
-}
+    // Inicializa o slider
+    updateSlider();
 
-// Função para atualizar o carrinho na UI
-function atualizarCarrinho() {
-    const carrinhoList = document.getElementById('carrinho-list');
-    const itemCount = document.getElementById('item-count');
+    // --- Lógica das Avaliações (Reviews) ---
+    const reviewsList = document.getElementById('reviews-list');
+    const reviewForm = document.getElementById('review-form');
 
-    carrinhoList.innerHTML = '';
+    // Dados iniciais (simulando um banco de dados)
+    let reviews = [
+        { name: "Ana M.", rating: 5, text: "O vestido é lindo e o tecido é super macio! Minha filha amou. Recomendo!" },
+        { name: "João P.", rating: 4, text: "Entrega rápida. A qualidade é boa, mas achei a cor um pouco diferente da foto." },
+        { name: "Carla S.", rating: 5, text: "Perfeito! O tamanho veio correto e o acabamento é excelente." }
+    ];
 
-    if (carrinho.length === 0) {
-        carrinhoList.innerHTML = '<li>Seu carrinho está vazio.</li>';
-    } else {
-        carrinho.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-            carrinhoList.appendChild(li);
+    function renderReviews() {
+        reviewsList.innerHTML = ''; // Limpa a lista
+        reviews.forEach(review => {
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review-item');
+            
+            // Função para converter a nota em estrelas HTML
+            const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+
+            reviewElement.innerHTML = `
+                <div class="review-header">
+                    <span>${review.name}</span>
+                    <span class="rating">${stars}</span>
+                </div>
+                <p>${review.text}</p>
+            `;
+            reviewsList.appendChild(reviewElement);
         });
     }
 
-    itemCount.textContent = carrinho.length;
-}
+    // Lida com o envio do formulário
+    reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o recarregamento da página
 
-// Função para finalizar a compra
-document.getElementById('finalizar-compra').addEventListener('click', () => {
-    if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-    } else {
-        alert("Compra finalizada com sucesso!");
-        carrinho = [];
-        atualizarCarrinho();
-    }
-});
+        const name = document.getElementById('reviewer-name').value;
+        const rating = parseInt(document.getElementById('review-rating').value);
+        const text = document.getElementById('review-text').value;
 
-// Inicializar a exibição dos produtos
-exibirProdutos();
-Explicação do Código:
-HTML:
+        if (name && rating >= 1 && rating <= 5 && text) {
+            const newReview = { name, rating, text };
+            reviews.unshift(newReview); // Adiciona a nova avaliação no início da lista
+            renderReviews(); // Atualiza a visualização
+            reviewForm.reset(); // Limpa o formulário
 
-O layout foi estruturado com um cabeçalho contendo o nome da loja "Smart", links de navegação e um rodapé simples.
-
-A seção de produtos contém uma lista dinâmica de celulares, e a seção de carrinho exibe os itens selecionados.
-
-CSS:
-
-Estilo básico para tornar o site agradável e responsivo. A parte principal é a estilização da lista de produtos e do carrinho de compras.
-
-Adicionamos uma hover effect nos botões para dar feedback visual ao usuário.
-
-JavaScript:
-
-Uma lista de produtos é criada com dados como nome, imagem, preço e descrição.
-
-A função exibirProdutos é responsável por exibir os produtos dinamicamente.
-
-adicionarAoCarrinho adiciona um item ao carrinho e atualiza a lista.
-
-O carrinho é atualizado com a função atualizarCarrinho, que conta os itens e os exibe.
-
-A funcionalidade de finalizar a compra mostra um alerta e limpa o carrinho.
-
-Como melhorar:
-Imagem de Produtos: As imagens estão usando URLs fictícias. Você pode substituir por URLs reais ou fazer upload das imagens no seu servidor.
-
-Pagamentos: Para um site real, você precisaria integrar
-
-
-
-Você disse:
-um sati de celular completo com os nomes dos modelos  iphone, ftos deles de todos os modelos das marcas, avaliacoes  varios produtos 
-
-O ChatGPT disse:
-Para criar um site de vendas de celulares completo com as funcionalidades de visualização de modelos, fotos, avaliações, e informações de vários produtos das principais marcas, como iPhone, Samsung, Xiaomi, Motorola, etc., precisaremos de uma estrutura mais elaborada com uma interface interativa. Vamos criar um site simples, mas completo, para realizar essas funcionalidades com HTML, CSS, e JavaScript.
-
-Estrutura:
-Página de Produtos: Exibe todos os celulares com fotos, preços e avaliações.
-
-Carrinho de Compras: Permite ao usuário adicionar produtos ao carrinho.
-
-Detalhes do Produto: Mostra informações mais detalhadas sobre cada celular.
-
-Avaliações: Usuários podem visualizar e deixar avaliações.
-
-Finalização de Compra: Finalização do pedido.
-
-1. HTML - index.html
-html
-Copiar código
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart - Loja de Celulares</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Smart - Loja de Celulares</h1>
-            <nav>
-                <a href="#produtos">Modelos</a>
-                <a href="#carrinho">Carrinho (<span id="item-count">0</span> Itens)</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="produtos" class="container">
-            <h2>Modelos de Celulares</h2>
-            <div class="produtos-container">
-                <!-- Os produtos serão exibidos aqui com JavaScript -->
-            </div>
-        </section>
-
-        <section id="carrinho" class="container">
-            <h2>Carrinho de Compras</h2>
-            <ul id="carrinho-list">
-                <li>Seu carrinho está vazio.</li>
-            </ul>
-            <button id="finalizar-compra" class="button">Finalizar Compra</button>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Smart - Todos os direitos reservados</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-2. CSS - styles.css
-css
-Copiar código
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-header {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-header .container {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 1.2em;
-}
-
-main {
-    padding: 40px 0;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.produtos-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.produto {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 220px;
-    margin: 20px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.produto img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.produto h3 {
-    font-size: 1.3em;
-    margin-bottom: 10px;
-}
-
-.produto p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-}
-
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-#carrinho-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-#carrinho-list li {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-#finalizar-compra {
-    background-color: #007bff;
-}
-
-#finalizar-compra:hover {
-    background-color: #0056b3;
-}
-
-footer {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-3. JavaScript - script.js
-javascript
-Copiar código
-// Dados dos celulares
-const produtos = [
-    {
-        id: 1,
-        nome: "iPhone 13",
-        imagem: "https://www.apple.com/v/iphone-13/f/images/overview/hero/iphone_13_hero__c9f7up4dtlaq_large_2x.jpg",
-        preco: 6799,
-        descricao: "iPhone 13 com chip A15 Bionic, câmera dupla de 12 MP e tela Super Retina XDR.",
-        avaliacoes: 4.7,
-        marca: "Apple"
-    },
-    {
-        id: 2,
-        nome: "Samsung Galaxy S21",
-        imagem: "https://www.samsung.com/latin_en/smartphones/galaxy-s21-5g/",
-        preco: 4999,
-        descricao: "Samsung Galaxy S21 com câmera de 64 MP, tela de 6.2” e processador Exynos.",
-        avaliacoes: 4.6,
-        marca: "Samsung"
-    },
-    {
-        id: 3,
-        nome: "Xiaomi Mi 11",
-        imagem: "https://www.mi.com/global/mi11",
-        preco: 3999,
-        descricao: "Xiaomi Mi 11 com tela AMOLED de 6.81”, Snapdragon 888 e câmera de 108 MP.",
-        avaliacoes: 4.5,
-        marca: "Xiaomi"
-    },
-    {
-        id: 4,
-        nome: "Motorola Edge 20",
-        imagem: "https://www.motorola.com.br",
-        preco: 3499,
-        descricao: "Motorola Edge 20 com tela OLED de 6.7” e câmera de 108 MP.",
-        avaliacoes: 4.3,
-        marca: "Motorola"
-    }
-];
-
-// Função para exibir os produtos
-function exibirProdutos() {
-    const container = document.querySelector('.produtos-container');
-    container.innerHTML = ''; // Limpar produtos existentes
-
-    produtos.forEach(produto => {
-        const divProduto = document.createElement('div');
-        divProduto.classList.add('produto');
-
-        divProduto.innerHTML = `
-            <img src="${produto.imagem}" alt="${produto.nome}">
-            <h3>${produto.nome}</h3>
-            <p>${produto.descricao}</p>
-            <p>R$ ${produto.preco.toFixed(2)}</p>
-            <p>Avaliação: ${produto.avaliacoes} estrelas</p>
-            <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
-        `;
-
-        container.appendChild(divProduto);
+            alert('Avaliação enviada com sucesso!');
+        } else {
+            alert('Por favor, preencha todos os campos corretamente.');
+        }
     });
-}
 
-// Função para adicionar produto ao carrinho
-let carrinho = [];
-
-function adicionarAoCarrinho(produtoId) {
-    const produto = produtos.find(p => p.id === produtoId);
-    carrinho.push(produto);
-    atualizarCarrinho();
-}
-
-// Função para atualizar o carrinho
-function atualizarCarrinho() {
-    const carrinhoList = document.getElementById('carrinho-list');
-    const itemCount = document.getElementById('item-count');
-
-    carrinhoList.innerHTML = '';
-
-    if (carrinho.length === 0) {
-        carrinhoList.innerHTML = '<li>Seu carrinho está vazio.</li>';
-    } else {
-        carrinho.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-            carrinhoList.appendChild(li);
-        });
-    }
-
-    itemCount.textContent = carrinho.length;
-}
-
-// Finalizar compra
-document.getElementById('finalizar-compra').addEventListener('click', () => {
-    if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-    } else {
-        alert("Compra finalizada com sucesso!");
-        carrinho = [];
-        atualizarCarrinho();
-    }
-});
-
-.produto p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-}
-
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-#carrinho-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-#carrinho-list li {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-#finalizar-compra {
-    background-color: #007bff;
-}
-
-#finalizar-compra:hover {
-    background-color: #0056b3;
-}
-
-footer {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-3. JavaScript - script.js
-javascript
-Copiar código
-// Definir os dados dos celulares
-const produtos = [
-    {
-        id: 1,
-        nome: "Samsung Galaxy S21",
-        imagem: "https://example.com/s21.jpg",
-        preco: 4500,
-        descricao: "Samsung Galaxy S21 com tela de 6.2”, câmera de 64 MP e bateria de 4000 mAh."
-    },
-    {
-        id: 2,
-        nome: "iPhone 13",
-        imagem: "https://example.com/iphone13.jpg",
-        preco: 6800,
-        descricao: "iPhone 13 com chip A15, câmera de 12 MP e tela Super Retina XDR."
-    },
-    {
-        id: 3,
-        nome: "Xiaomi Mi 11",
-        imagem: "https://example.com/mi11.jpg",
-        preco: 3500,
-        descricao: "Xiaomi Mi 11 com tela AMOLED de 6.81” e câmera de 108 MP."
-    },
-    {
-        id: 4,
-        nome: "Motorola Edge 20",
-        imagem: "https://example.com/edge20.jpg",
-        preco: 3200,
-        descricao: "Motorola Edge 20 com tela OLED de 6.7” e câmera de 108 MP."
-    }
-];
-
-// Função para exibir os produtos
-function exibirProdutos() {
-    const container = document.querySelector('.produtos-container');
-    container.innerHTML = ''; // Limpar produtos existentes
-
-    produtos.forEach(produto => {
-        const divProduto = document.createElement('div');
-        divProduto.classList.add('produto');
-
-        divProduto.innerHTML = `
-            <img src="${produto.imagem}" alt="${produto.nome}">
-            <h3>${produto.nome}</h3>
-            <p>R$ ${produto.preco.toFixed(2)}</p>
-            <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
-        `;
-
-        container.appendChild(divProduto);
-    });
-}
-
-// Função para adicionar produto ao carrinho
-let carrinho = [];
-
-function adicionarAoCarrinho(produtoId) {
-    const produto = produtos.find(p => p.id === produtoId);
-    carrinho.push(produto);
-    atualizarCarrinho();
-}
-
-// Função para atualizar o carrinho na UI
-function atualizarCarrinho() {
-    const carrinhoList = document.getElementById('carrinho-list');
-    const itemCount = document.getElementById('item-count');
-
-    carrinhoList.innerHTML = '';
-
-    if (carrinho.length === 0) {
-        carrinhoList.innerHTML = '<li>Seu carrinho está vazio.</li>';
-    } else {
-        carrinho.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-            carrinhoList.appendChild(li);
-        });
-    }
-
-    itemCount.textContent = carrinho.length;
-}
-
-// Função para finalizar a compra
-document.getElementById('finalizar-compra').addEventListener('click', () => {
-    if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-    } else {
-        alert("Compra finalizada com sucesso!");
-        carrinho = [];
-        atualizarCarrinho();
-    }
-});
-
-// Inicializar a exibição dos produtos
-exibirProdutos();
-Explicação do Código:
-HTML:
-
-O layout foi estruturado com um cabeçalho contendo o nome da loja "Smart", links de navegação e um rodapé simples.
-
-A seção de produtos contém uma lista dinâmica de celulares, e a seção de carrinho exibe os itens selecionados.
-
-CSS:
-
-Estilo básico para tornar o site agradável e responsivo. A parte principal é a estilização da lista de produtos e do carrinho de compras.
-
-Adicionamos uma hover effect nos botões para dar feedback visual ao usuário.
-
-JavaScript:
-
-Uma lista de produtos é criada com dados como nome, imagem, preço e descrição.
-
-A função exibirProdutos é responsável por exibir os produtos dinamicamente.
-
-adicionarAoCarrinho adiciona um item ao carrinho e atualiza a lista.
-
-O carrinho é atualizado com a função atualizarCarrinho, que conta os itens e os exibe.
-
-A funcionalidade de finalizar a compra mostra um alerta e limpa o carrinho.
-
-Como melhorar:
-Imagem de Produtos: As imagens estão usando URLs fictícias. Você pode substituir por URLs reais ou fazer upload das imagens no seu servidor.
-
-Pagamentos: Para um site real, você precisaria integrar
-
-
-
-Você disse:
-um sati de celular completo com os nomes dos modelos  iphone, ftos deles de todos os modelos das marcas, avaliacoes  varios produtos 
-
-O ChatGPT disse:
-Para criar um site de vendas de celulares completo com as funcionalidades de visualização de modelos, fotos, avaliações, e informações de vários produtos das principais marcas, como iPhone, Samsung, Xiaomi, Motorola, etc., precisaremos de uma estrutura mais elaborada com uma interface interativa. Vamos criar um site simples, mas completo, para realizar essas funcionalidades com HTML, CSS, e JavaScript.
-
-Estrutura:
-Página de Produtos: Exibe todos os celulares com fotos, preços e avaliações.
-
-Carrinho de Compras: Permite ao usuário adicionar produtos ao carrinho.
-
-Detalhes do Produto: Mostra informações mais detalhadas sobre cada celular.
-
-Avaliações: Usuários podem visualizar e deixar avaliações.
-
-Finalização de Compra: Finalização do pedido.
-
-1. HTML - index.html
-html
-Copiar código
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart - Loja de Celulares</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Smart - Loja de Celulares</h1>
-            <nav>
-                <a href="#produtos">Modelos</a>
-                <a href="#carrinho">Carrinho (<span id="item-count">0</span> Itens)</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="produtos" class="container">
-            <h2>Modelos de Celulares</h2>
-            <div class="produtos-container">
-                <!-- Os produtos serão exibidos aqui com JavaScript -->
-            </div>
-        </section>
-
-        <section id="carrinho" class="container">
-            <h2>Carrinho de Compras</h2>
-            <ul id="carrinho-list">
-                <li>Seu carrinho está vazio.</li>
-            </ul>
-            <button id="finalizar-compra" class="button">Finalizar Compra</button>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Smart - Todos os direitos reservados</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
-2. CSS - styles.css
-css
-Copiar código
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-header {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-header .container {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header nav a {
-    color: white;
-    margin-left: 20px;
-    text-decoration: none;
-    font-size: 1.2em;
-}
-
-main {
-    padding: 40px 0;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-}
-
-.produtos-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.produto {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 220px;
-    margin: 20px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.produto img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.produto h3 {
-    font-size: 1.3em;
-    margin-bottom: 10px;
-}
-
-.produto p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
-}
-
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-#carrinho-list {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-#carrinho-list li {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-}
-
-#finalizar-compra {
-    background-color: #007bff;
-}
-
-#finalizar-compra:hover {
-    background-color: #0056b3;
-}
-
-footer {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-3. JavaScript - script.js
-javascript
-Copiar código
-// Dados dos celulares
-const produtos = [
-    {
-        id: 1,
-        nome: "iPhone 13",
-        imagem: "https://www.apple.com/v/iphone-13/f/images/overview/hero/iphone_13_hero__c9f7up4dtlaq_large_2x.jpg",
-        preco: 6799,
-        descricao: "iPhone 13 com chip A15 Bionic, câmera dupla de 12 MP e tela Super Retina XDR.",
-        avaliacoes: 4.7,
-        marca: "Apple"
-    },
-    {
-        id: 2,
-        nome: "Samsung Galaxy S21",
-        imagem: "https://www.samsung.com/latin_en/smartphones/galaxy-s21-5g/",
-        preco: 4999,
-        descricao: "Samsung Galaxy S21 com câmera de 64 MP, tela de 6.2” e processador Exynos.",
-        avaliacoes: 4.6,
-        marca: "Samsung"
-    },
-    {
-        id: 3,
-        nome: "Xiaomi Mi 11",
-        imagem: "https://www.mi.com/global/mi11",
-        preco: 3999,
-        descricao: "Xiaomi Mi 11 com tela AMOLED de 6.81”, Snapdragon 888 e câmera de 108 MP.",
-        avaliacoes: 4.5,
-        marca: "Xiaomi"
-    },
-    {
-        id: 4,
-        nome: "Motorola Edge 20",
-        imagem: "https://www.motorola.com.br",
-        preco: 3499,
-        descricao: "Motorola Edge 20 com tela OLED de 6.7” e câmera de 108 MP.",
-        avaliacoes: 4.3,
-        marca: "Motorola"
-    }
-];
-
-// Função para exibir os produtos
-function exibirProdutos() {
-    const container = document.querySelector('.produtos-container');
-    container.innerHTML = ''; // Limpar produtos existentes
-
-    produtos.forEach(produto => {
-        const divProduto = document.createElement('div');
-        divProduto.classList.add('produto');
-
-        divProduto.innerHTML = `
-            <img src="${produto.imagem}" alt="${produto.nome}">
-            <h3>${produto.nome}</h3>
-            <p>${produto.descricao}</p>
-            <p>R$ ${produto.preco.toFixed(2)}</p>
-            <p>Avaliação: ${produto.avaliacoes} estrelas</p>
-            <button onclick="adicionarAoCarrinho(${produto.id})">Adicionar ao Carrinho</button>
-        `;
-
-        container.appendChild(divProduto);
-    });
-}
-
-// Função para adicionar produto ao carrinho
-let carrinho = [];
-
-function adicionarAoCarrinho(produtoId) {
-    const produto = produtos.find(p => p.id === produtoId);
-    carrinho.push(produto);
-    atualizarCarrinho();
-}
-
-// Função para atualizar o carrinho
-function atualizarCarrinho() {
-    const carrinhoList = document.getElementById('carrinho-list');
-    const itemCount = document.getElementById('item-count');
-
-    carrinhoList.innerHTML = '';
-
-    if (carrinho.length === 0) {
-        carrinhoList.innerHTML = '<li>Seu carrinho está vazio.</li>';
-    } else {
-        carrinho.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
-            carrinhoList.appendChild(li);
-        });
-    }
-
-    itemCount.textContent = carrinho.length;
-}
-
-// Finalizar compra
-document.getElementById('finalizar-compra').addEventListener('click', () => {
-    if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
-    } else {
-        alert("Compra finalizada com sucesso!");
-        carrinho = [];
-        atualizarCarrinho();
-    }
+    // Inicializa a lista de avaliações
+    renderReviews();
 });
